@@ -28,19 +28,59 @@ class GroceryListTableViewController: UITableViewController {
   let listToUsers = "ListToUsers"
   
   // MARK: Properties 
-  var items: [GroceryItem] = []
+  var items = [GroceryItem]()
+  var filteredItems = [GroceryItem]()
   var user: User!
   var userCountBarButtonItem: UIBarButtonItem!
+  
+  let searchController = UISearchController(searchResultsController: nil)
   
   //This is a Firebase reference that points to an online location that stores a list of online users.
   let usersRef = FIRDatabase.database().reference(withPath: "online")
   
   let ref = FIRDatabase.database().reference(withPath: "list-items")
   
+  
+  // MARK: - Private instance methods
+  
+  func searchBarIsEmpty() -> Bool {
+    // Returns true if the text is empty or nil
+    return searchController.searchBar.text?.isEmpty ?? true
+  }
+  
+  func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+    filteredItems = items.filter({( groceryItem : GroceryItem) -> Bool in
+      return groceryItem.name.lowercased().contains(searchText.lowercased())
+    })
+    
+    tableView.reloadData()
+  }
+  
+  func isFiltering() -> Bool {
+    return searchController.isActive && !searchBarIsEmpty()
+  }
+  
   // MARK: UIViewController Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    
+    // Setup the Search Controller
+    searchController.searchResultsUpdater = self
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchBar.placeholder = "Search Items"
+    searchController.searchBar.setValue("Add", forKey: "_cancelButtonText")
+    
+    //searchController.searchBar.setShowsCancelButton(true, animated: true)
+    
+    searchController.searchBar.delegate = self
+    
+    
+    navigationItem.searchController = searchController
+    navigationItem.hidesSearchBarWhenScrolling = false
+    definesPresentationContext = true
+    
     
     tableView.allowsMultipleSelectionDuringEditing = false
     
@@ -123,12 +163,23 @@ class GroceryListTableViewController: UITableViewController {
   // MARK: UITableView Delegate methods
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return items.count
+    if isFiltering() {
+      return filteredItems.count
+    } else {
+      return items.count
+    }
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath)
-    let groceryItem = items[indexPath.row]
+    
+    
+    let groceryItem: GroceryItem
+    if isFiltering() {
+      groceryItem = filteredItems[indexPath.row]
+    } else {
+      groceryItem = items[indexPath.row]
+    }
     
     cell.textLabel?.text = groceryItem.name
     cell.detailTextLabel?.text = groceryItem.addedByUser
@@ -255,3 +306,29 @@ class GroceryListTableViewController: UITableViewController {
   }
   
 }
+
+extension GroceryListTableViewController: UISearchBarDelegate {
+  
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    print("Cancel button clicked...")
+  }
+  
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    print("Text Begin Editing...")
+  }
+  
+  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    print("Text End Editing...")
+  }
+  
+}
+
+extension GroceryListTableViewController: UISearchResultsUpdating {
+  
+  func updateSearchResults(for searchController: UISearchController) {
+    
+    filterContentForSearchText(searchController.searchBar.text!)
+    
+  }
+}
+
