@@ -17,6 +17,7 @@
 		BB23858A1B3DD9640079CD01 /* GroceryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2385891B3DD9640079CD01 /* GroceryItem.swift */; };
 		BB30CD4A1B439B60004B3177 /* OnlineUsersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB30CD491B439B60004B3177 /* OnlineUsersTableViewController.swift */; };
 		BB7DA5111B42C8100018B530 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7DA5101B42C8100018B530 /* User.swift */; };
+		F438DE16201296D9004ADDB1 /* Footer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F438DE15201296D9004ADDB1 /* Footer.swift */; };
 		F4FD4E582010F70D007F45EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4FD4E572010F70D007F45EF /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		BB2385891B3DD9640079CD01 /* GroceryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItem.swift; sourceTree = "<group>"; };
 		BB30CD491B439B60004B3177 /* OnlineUsersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineUsersTableViewController.swift; sourceTree = "<group>"; };
 		BB7DA5101B42C8100018B530 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F438DE15201296D9004ADDB1 /* Footer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footer.swift; sourceTree = "<group>"; };
 		F4FD4E572010F70D007F45EF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F599D9265F4B40571F432E78 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				BB2385611B3DD5AB0079CD01 /* AppDelegate.swift */,
+				F438DE15201296D9004ADDB1 /* Footer.swift */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				BB2385841B3DD8660079CD01 /* GroceryListTableViewController.swift in Sources */,
 				BB23858A1B3DD9640079CD01 /* GroceryItem.swift in Sources */,
 				BB30CD4A1B439B60004B3177 /* OnlineUsersTableViewController.swift in Sources */,
+				F438DE16201296D9004ADDB1 /* Footer.swift in Sources */,
 				BB7DA5111B42C8100018B530 /* User.swift in Sources */,
 				BB2385621B3DD5AB0079CD01 /* AppDelegate.swift in Sources */,
 			);

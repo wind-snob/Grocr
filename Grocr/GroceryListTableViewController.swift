@@ -35,6 +35,8 @@ class GroceryListTableViewController: UITableViewController {
   
   let searchController = UISearchController(searchResultsController: nil)
   
+  let footerView = Footer()
+  
   //This is a Firebase reference that points to an online location that stores a list of online users.
   let usersRef = FIRDatabase.database().reference(withPath: "online")
   
@@ -62,9 +64,19 @@ class GroceryListTableViewController: UITableViewController {
   
   // MARK: UIViewController Lifecycle
   
+  
+  
+  override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    
+    return footerView
+  }
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
+  
+    footerView.setIsFilteringToShow(filteredItemCount: 55, of: 99)
     
     // Setup the Search Controller
     searchController.searchResultsUpdater = self
@@ -89,7 +101,7 @@ class GroceryListTableViewController: UITableViewController {
                                              target: self,
                                              action: #selector(userCountButtonDidTouch))
     userCountBarButtonItem.tintColor = UIColor.white
-    navigationItem.leftBarButtonItem = userCountBarButtonItem
+    // navigationItem.leftBarButtonItem = userCountBarButtonItem
     
     user = User(uid: "FakeId", email: "hungry@person.food")
     
